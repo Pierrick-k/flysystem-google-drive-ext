@@ -20,6 +20,7 @@ use League\Flysystem\UnableToCopyFile;
 use League\Flysystem\UnableToCreateDirectory;
 use League\Flysystem\UnableToDeleteDirectory;
 use League\Flysystem\UnableToDeleteFile;
+use League\Flysystem\UnableToListContents;
 use League\Flysystem\UnableToMoveFile;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
@@ -899,7 +900,7 @@ class GoogleDriveAdapter implements FilesystemAdapter
             $folderId = $this->resolveFolderIdFromPath($directory);
 
             if (!$folderId) {
-                throw UnableToListContents::atLocation($directory, "Folder not found");
+                throw UnableToListContents ::atLocation($directory, "Folder not found");
             }
 
             $files = [];
