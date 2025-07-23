@@ -894,7 +894,39 @@ class GoogleDriveAdapter implements FilesystemAdapter
      */
     public function listContents(string $directory, bool $recursive): iterable
     {
-        $this->refreshToken();
+        
+        try {
+            $folderId = $this->resolveFolderIdFromPath($directory);
+
+            if (!$folderId) {
+                throw UnableToListContents::atLocation($directory, "Folder not found");
+            }
+
+            $files = [];
+            $pageToken = null;
+
+            do {
+                $params = [
+                    'q' => "'$folderId' in parents and trashed = false",
+                    'fields' => 'nextPageToken, files(id, name, mimeType, modifiedTime, size)',
+                    'spaces' => 'drive',
+                    'pageToken' => $pageToken,
+                ];
+
+                $response = $this->service->files->listFiles($params);
+                foreach ($response->getFiles() as $file) {
+                    $files[] = $this->normalizeFile($file, $directory);
+                }
+
+                $pageToken = $response->getNextPageToken();
+            } while ($pageToken);
+
+            return $files;
+        } catch (\Throwable $e) {
+            throw UnableToListContents::atLocation($directory, $e->getMessage());
+        }
+        
+        /*$this->refreshToken();
         $path = $this->prefixer->prefixPath($directory);
         if ($this->useDisplayPaths) {
             $time = microtime(true);
@@ -916,7 +948,7 @@ class GoogleDriveAdapter implements FilesystemAdapter
             foreach (array_values($this->getItems($path, $recursive)) as $item) {
                 yield $item;
             }
-        }
+        }*/
     }
 
     /**
