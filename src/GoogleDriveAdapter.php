@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Masbug\Flysystem;
+namespace PierrickK\Flysystem\GoogleDrive;
 
 use Exception;
 use Google\Service\Drive;
