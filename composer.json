@@ -1,5 +1,5 @@
 {
-    "name": "pierrick-k/flysystem-google-drive",
+    "name": "pierrick-k/flysystem-google-drive-ext",
     "type": "library",
     "description": "Flysystem adapter for Google Drive with seamless virtual<=>display path translation",
     "keywords": [
