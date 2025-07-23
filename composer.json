@@ -1,5 +1,6 @@
 {
-    "name": "masbug/flysystem-google-drive-ext",
+    "name": "pierrick-k/flysystem-google-drive",
+    "type": "library",
     "description": "Flysystem adapter for Google Drive with seamless virtual<=>display path translation",
     "keywords": [
         "flysystem",
@@ -17,13 +18,17 @@
         {
             "name": "Mitja Spes",
             "email": "mitja@lxnav.com"
+        },
+        {
+            "name": "pierrick K",
+            "email": "@gmail.com"
         }
     ],
     "require": {
-        "php": "^7.2 | ^8.0",
+        "php": "^8.1",
         "ext-mbstring": "*",
         "guzzlehttp/guzzle": "^6.3 | ^7.0",
-        "league/flysystem": "^2.1.1|^3.0",
+        "league/flysystem": "^3.0",
         "google/apiclient": "^2.2",
         "guzzlehttp/psr7": "^1.7|^2.0"
     },
@@ -33,7 +38,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Masbug\\Flysystem\\": "src"
+             "PierrickK\\Flysystem\\GoogleDrive\\": "src"
         }
     }
 }
