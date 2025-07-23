@@ -900,7 +900,7 @@ class GoogleDriveAdapter implements FilesystemAdapter
             $folderId = $this->resolveFolderIdFromPath($directory);
 
             if (!$folderId) {
-                throw UnableToListContents ::atLocation($directory, "Folder not found");
+                throw UnableToListContents::atLocation($directory, false, new \RuntimeException("Folder not found"));
             }
 
             $files = [];
@@ -924,7 +924,7 @@ class GoogleDriveAdapter implements FilesystemAdapter
 
             return $files;
         } catch (\Throwable $e) {
-            throw UnableToListContents::atLocation($directory, $e->getMessage());
+            throw UnableToListContents::atLocation($directory, false, $e);
         }
         
         /*$this->refreshToken();
